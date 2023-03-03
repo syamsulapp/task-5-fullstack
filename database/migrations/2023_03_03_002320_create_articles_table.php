@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('image', 128);
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-            $table->unsignedInteger('categories_id');
-            $table->foreign('categories_id')->references('id')->on('categories');
+            $table->integer('category_id');
             $table->timestamps();
             $table->softDeletes();
         });
