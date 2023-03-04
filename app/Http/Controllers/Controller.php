@@ -40,6 +40,7 @@ class Controller extends BaseController
             default:
                 if ($statusCode === 422) $res = array('message' => $message, 'data' => $data);
                 if ($statusCode === 426) $res = array('message' => $message);
+                if ($statusCode === 401) $res = array('message' => $message);
                 break;
         }
 

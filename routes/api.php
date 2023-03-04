@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['prefix' => 'v1', 'namespace' => 'api'], function () {
-    Route::post('login', [Auth::class, 'login']);
-    Route::post('register', [Auth::class, 'register']);
+    Route::post('login', [Auth::class, 'login'])->name('login.api');
+    Route::post('register', [Auth::class, 'register'])->name('register.api');
+
+    Route::middleware('session:api')->group(function () {
+        Route::post('logout', [Auth::class, 'logout'])->name('logout.api');
+        Route::post('user', [Auth::class, 'user'])->name('user.api');
+    });
 });
