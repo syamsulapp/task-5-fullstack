@@ -88,7 +88,7 @@ class Auth extends Controller
     public function logout()
     {
         $user = $this->user->user()->id;
-        $token = DeleteToken::where('user_id', $user)->delete();
+        DeleteToken::where('user_id', $user)->delete();
         return $this->resBuilder('Berhasil Logout');
     }
 
