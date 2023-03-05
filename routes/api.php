@@ -34,6 +34,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api'], function () {
         Route::prefix('categories')->group(function () {
             Route::get('', [Categories::class, 'index'])->name('view.categories');
             Route::post('', [Categories::class, 'store'])->name('store.categories');
+            Route::get('{id}/detail', [Categories::class, 'detail'])->name('detail.categories');
             Route::put('{id}/update', [Categories::class, 'update'])->name('update.categories');
             Route::delete('{id}/delete', [Categories::class, 'delete'])->name('delete.categories');
         });
