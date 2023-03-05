@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\Articles;
 use App\Http\Controllers\api\Auth;
+use App\Http\Controllers\api\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +24,18 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api'], function () {
     Route::middleware('session:api')->group(function () {
         Route::post('logout', [Auth::class, 'logout'])->name('logout.api');
         Route::post('user', [Auth::class, 'user'])->name('user.api');
+
+        Route::prefix('articles')->group(function () {
+            Route::get('', [Articles::class, 'index'])->name('view.articles');
+            Route::post('', [Articles::class, 'store'])->name('store.articles');
+            Route::put('{id}/update', [Articles::class, 'update'])->name('update.articles');
+            Route::delete('{id}/delete', [Articles::class, 'delete'])->name('delete.articles');
+        });
+        Route::prefix('category')->group(function () {
+            Route::get('', [Categories::class, 'index'])->name('view.categories');
+            Route::post('', [Categories::class, 'store'])->name('store.categories');
+            Route::put('{id}/update', [Categories::class, 'update'])->name('update.categories');
+            Route::delete('{id}/delete', [Categories::class, 'delete'])->name('delete.categories');
+        });
     });
 });
