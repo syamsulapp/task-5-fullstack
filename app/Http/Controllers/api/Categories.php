@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Articles;
 use Illuminate\Http\Request;
 use App\Models\Categories as DataCategory;
 use App\Models\User;
@@ -34,7 +35,14 @@ class Categories extends Controller
             ->orderBy('id')
             ->paginate($limit);
 
-        return $this->resBuilder($data->items());
+        return $this->resBuilder(['categories' => $data->items(), 'total' => $this->category->count()]);
+    }
+
+    public function detail($id)
+    {
+        !$this->category->where('id', $id)->first() ? $result = $this->resBuilder($id, 422, 'id tidak di temukan') :
+            $result = $this->resBuilder($this->category->whereId($id)->with('articles')->get(), 200, 'Successfuly Detail Data');
+        return $result;
     }
 
     public function store(Request $request)
@@ -42,7 +50,6 @@ class Categories extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
         ]);
-
         if ($validate->fails()) {
             $result = $this->customError(collect($validate->errors()));
         } else {
@@ -57,13 +64,11 @@ class Categories extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
         ]);
-
         if ($validate->fails()) {
             $result = $this->customError(collect($validate->errors()));
         } else {
-            $update = $request->only('name');
-            !$this->category->where('id', $id)->first() ? $result = $this->resBuilder($request, 422, 'id tidak di temukan') :
-                $result = $this->category->where('id', $id)->update($update);
+            !$this->category->where('id', $id)->first() ? $result = $this->resBuilder($id, 422, 'id tidak di temukan') :
+                $result = $this->resBuilder($this->category->where('id', $id)->update($request->only('name')), 200, 'Successfully update categories');
         }
 
         return $result;
