@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Validator;
 class Articles extends Controller
 {
     protected $article;
+
     protected $user;
+
     public function __construct(DataArticle $article, User $user)
     {
         $this->article = $article;
@@ -20,12 +22,13 @@ class Articles extends Controller
 
     public function index(Request $request)
     {
-        $limit = 50; // limit default
+        $limit = 50; // limit default 50
 
         if ($limit >= $request->limit) {
             $limit = $request->limit;
         }
 
+        // search data
         $data = $this->article->when($request->name, function ($query) use ($request) {
             return $query->where('title', 'LIKE', "%{$request->name}%");
         })->when($request->user_id, function ($query) use ($request) {
@@ -34,6 +37,7 @@ class Articles extends Controller
             return $query->where('category_id', $request->category_id);
         })
             ->orderBy('id')
+            // pagination
             ->paginate($limit);
 
         return $this->resBuilder($data->items());
@@ -41,6 +45,8 @@ class Articles extends Controller
 
     public function store(Request $request)
     {
+
+        // validate request untuk request tambah
         $validate = Validator::make($request->all(), [
             'title' => 'required|string',
             'content' => 'required|string',
@@ -60,6 +66,7 @@ class Articles extends Controller
     }
     public function update($id, Request $request)
     {
+        // validate request untuk request update
         $validate = Validator::make($request->all(), [
             'title' => 'required|string',
             'content' => 'required|string',
@@ -71,6 +78,7 @@ class Articles extends Controller
             $result = $this->customError(collect($validate->errors()));
         } else {
             $update = $request->only('title', 'content', 'image', 'category_id');
+            // jika imagenya di kosongkan maka gambar tidak di update
             if ($request->image != null) {
                 $update['image'] = $request->file('image')->store('image');
                 !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($request, 422, 'id tidak di temukan') :
@@ -85,6 +93,7 @@ class Articles extends Controller
     }
     public function delete($id)
     {
+        // delete menggunakan id articles
         !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($id, 422, 'id tidak di temukan') :
             $result = $this->resBuilder($this->article->where('id', $id)->delete(), 200, 'successfully delete articles');
         return $result;
