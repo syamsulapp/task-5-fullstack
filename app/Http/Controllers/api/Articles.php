@@ -75,7 +75,7 @@ class Articles extends Controller
             if ($request->image != null) {
                 $update['image'] = $request->file('image')->store('image');
                 !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($request, 422, 'id tidak di temukan') :
-                    $result = $this->article->where('id', $id)->update($update);
+                    $result = $this->resBuilder($this->article->where('id', $id)->update($update), 200, 'Successfully update articles');
             } else {
                 !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($id, 422, 'id tidak di temukan') :
                     $result = $this->resBuilder($this->article->where('id', $id)->update($update), '200', 'Successfully Update Articles');
