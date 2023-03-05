@@ -21,6 +21,11 @@ class Articles extends Controller
         $this->user = $user;
     }
 
+    public function detail($id)
+    {
+        return $this->resBuilder($this->article->whereId($id)->first());
+    }
+
     public function index(Request $request)
     {
         $limit = 50; // limit default 50
