@@ -21,8 +21,10 @@ class ArticlesResource extends JsonResource
                 'id' => $this->id,
                 'title' => $this->title,
                 'content' => $this->content,
-                'image' => storage_path($this->image),
-                'users' => $user->where('id', $this->users_id)->first()
+                'image' => url('img_articles', $this->image),
+                'users' => $user->where('id', $this->users_id)->first(),
+                'created_at' => date($this->created_at),
+                'updated_at' => date($this->updated_at)
             ];
     }
 }

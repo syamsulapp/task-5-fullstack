@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticlesResource;
 use Illuminate\Http\Request;
 use App\Models\Articles as DataArticle;
 use App\Models\User;
@@ -40,7 +41,7 @@ class Articles extends Controller
             // pagination
             ->paginate($limit);
 
-        return $this->resBuilder(['articles' => $data->items(), 'total' => $this->article->count()]);
+        return $this->resBuilder(['articles' => ArticlesResource::collection($data->items()), 'total' => $this->article->count()]);
     }
 
     public function store(Request $request)
@@ -59,7 +60,13 @@ class Articles extends Controller
         } else {
             $data = $request->only('title', 'content', 'image', 'users_id', 'category_id');
             $data['users_id'] = $this->user->user()->id;
-            $data['image'] = $request->file('image')->store('image');
+            // request for upload foto
+            $foto = $request->file('image');
+            $nama_file = time() . "-" . $foto->getClientOriginalName();
+            $file_up = 'img_articles';
+            $foto->move($file_up, $nama_file);
+            //save name file foto
+            $data['image'] = $nama_file;
             $result =  $this->resBuilder($this->article->create($data), 200, 'Successfully Create Articles');
         }
         return $result;
