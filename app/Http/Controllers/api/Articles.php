@@ -40,7 +40,7 @@ class Articles extends Controller
             // pagination
             ->paginate($limit);
 
-        return $this->resBuilder(['articles' => $data->items(), 'total_data' => $this->article->count()]);
+        return $this->resBuilder(['articles' => $data->items(), 'total' => $this->article->count()]);
     }
 
     public function store(Request $request)
