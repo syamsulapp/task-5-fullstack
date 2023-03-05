@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\DetailResource;
 use App\Models\Articles;
 use Illuminate\Http\Request;
 use App\Models\Categories as DataCategory;
@@ -41,7 +43,7 @@ class Categories extends Controller
     public function detail($id)
     {
         !$this->category->where('id', $id)->first() ? $result = $this->resBuilder($id, 422, 'id tidak di temukan') :
-            $result = $this->resBuilder($this->category->whereId($id)->with('articles')->get(), 200, 'Successfuly Detail Data');
+            $result = $this->resBuilder(DetailResource::collection($this->category->whereId($id)->with('articles')->get()), 200, 'Successfuly Detail Category');
         return $result;
     }
 
