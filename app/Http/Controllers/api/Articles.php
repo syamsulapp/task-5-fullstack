@@ -71,7 +71,6 @@ class Articles extends Controller
             $result = $this->customError(collect($validate->errors()));
         } else {
             $update = $request->only('title', 'content', 'image', 'category_id');
-
             if ($request->image != null) {
                 $update['image'] = $request->file('image')->store('image');
                 !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($request, 422, 'id tidak di temukan') :
