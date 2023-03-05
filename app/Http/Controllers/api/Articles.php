@@ -23,7 +23,10 @@ class Articles extends Controller
 
     public function detail($id)
     {
-        return $this->resBuilder($this->article->whereId($id)->first());
+        if ($this->article->where('id', $id)->first())
+            return $this->resBuilder($this->article->whereId($id)->first(), 200, 'Successfully Detail Articles');
+
+        return $this->resBuilder($id, 422, 'id tidak di temukan');
     }
 
     public function index(Request $request)
