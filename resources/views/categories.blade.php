@@ -18,6 +18,7 @@
                     <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Users</th>
                                 <th>action</th>
@@ -26,6 +27,7 @@
                         <tbody>
                             @foreach($data as $d)
                             <tr>
+                                <td>{{ $d->id }}</td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->users_id }}</td>
                                 <td>
@@ -41,6 +43,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Users</th>
                                 <th>action</th>

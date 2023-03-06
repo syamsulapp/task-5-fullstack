@@ -18,6 +18,7 @@
                     <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Category</th>
@@ -29,6 +30,7 @@
                         <tbody>
                             @foreach($data as $d)
                             <tr>
+                                <td>{{ $d->id }}</td>
                                 <td>{{ $d->title }}</td>
                                 <td>{{ $d->content }}</td>
                                 <td>{{ $d->category_id }}</td>
@@ -47,6 +49,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Id</th>
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Category</th>
