@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -21,7 +22,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::table('users')->insert([
+            'name' => 'administrator',
+            'email' => 'administrator@gmail.com',
+            'password' => 'administrator',
+        ]);
     }
+
 
     /**
      * Reverse the migrations.
