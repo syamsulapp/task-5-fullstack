@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
 {
@@ -12,7 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $data = Categories::all();
+        return view('categories', ['data' => $data]);
     }
 
     /**
@@ -20,7 +22,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories_form');
     }
 
     /**
@@ -28,15 +30,19 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $custom = [
+            'required' => ':attribute jangan dikosongkan',
+            'string' => 'harus text'
+        ];
+        $request->validate([
+            'name' => 'required|string',
+        ], $custom);
+        Categories::create([
+            'name' => $request->name,
+            'users_id' => Auth::user()->id
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categories $categories)
-    {
-        //
+        return redirect()->route('view.categories')->with(['message' => 'sukses tambah categories']);
     }
 
     /**
@@ -44,7 +50,7 @@ class CategoriesController extends Controller
      */
     public function edit(Categories $categories)
     {
-        //
+        return view('categories_edit', $categories);
     }
 
     /**
@@ -52,7 +58,20 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        $custom = [
+            'required' => ':attribute jangan dikosongkan',
+            'string' => 'harus text'
+        ];
+        $request->validate([
+            'name' => 'required|string',
+        ], $custom);
+        Categories::where('id', $categories->id)
+            ->update([
+                'name' => $request->name,
+                'users_id' => Auth::user()->id,
+            ]);
+
+        return redirect()->route('view.categories')->with(['message' => 'sukses update categories']);
     }
 
     /**
@@ -60,6 +79,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        Categories::destroy('id', $categories->id);
+        return redirect()->route('view.categories')->with(['message' => 'sukses delete categories']);
     }
 }

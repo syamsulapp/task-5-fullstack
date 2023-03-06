@@ -29,11 +29,21 @@
                     <ul class="nav">
                         <li><a href="#welcome" class="active">Home</a></li>
                         <li><a href="#features">About</a></li>
-                        <li><a href="#work-process">Work Process</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#pricing-plans">Pricing Tables</a></li>
-                        <li><a href="#blog">Blog Entries</a></li>
-                        <li><a href="#contact-us">Contact Us</a></li>
+                        <li><a href="#blog">Articles</a></li>
+                        <li><a href="#blog2">Category</a></li>
+
+                        @guest
+                        @if(Route::has('login'))
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        @endif
+
+                        @if(Route::has('register'))
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                        @endif
+                        @else
+                        <li><a href="{{ route('home') }}">{{ Auth::user()->name }}</a></li>
+
+                        @endguest
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -161,289 +171,6 @@
 </section>
 <!-- ***** Features Big Item End ***** -->
 
-<!-- ***** Home Parallax Start ***** -->
-<section class="mini" id="work-process">
-    <div class="mini-content">
-        <div class="container">
-            <div class="row">
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="info">
-                        <h1>Work Process</h1>
-                        <p>Aenean nec tempor metus. Maecenas ligula dolor, commodo in imperdiet interdum, vehicula ut ex. Donec ante diam.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ***** Mini Box Start ***** -->
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Get Ideas</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Sketch Up</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Discuss</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Revise</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Approve</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                    <a href="#" class="mini-box">
-                        <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-                        <strong>Launch</strong>
-                        <span>Godard pabst prism fam cliche.</span>
-                    </a>
-                </div>
-            </div>
-            <!-- ***** Mini Box End ***** -->
-        </div>
-    </div>
-</section>
-<!-- ***** Home Parallax End ***** -->
-
-<!-- ***** Testimonials Start ***** -->
-<section class="section" id="testimonials">
-    <div class="container">
-        <!-- ***** Section Title Start ***** -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="center-heading">
-                    <h2 class="section-title">What do they say?</h2>
-                </div>
-            </div>
-            <div class="offset-lg-3 col-lg-6">
-                <div class="center-text">
-                    <p>Donec tempus, sem non rutrum imperdiet, lectus orci fringilla nulla, at accumsan elit eros a turpis. Ut sagittis lectus libero.</p>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Section Title End ***** -->
-
-        <div class="row">
-            <!-- ***** Testimonials Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="team-item">
-                    <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Proin a neque nisi. Nam ipsum nisi, venenatis ut nulla quis, egestas scelerisque orci. Maecenas a finibus odio.</p>
-                        <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
-                        </div>
-                        <div class="team-info">
-                            <h3 class="user-name">Catherine Soft</h3>
-                            <span>Managing Director</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Testimonials Item End ***** -->
-
-            <!-- ***** Testimonials Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="team-item">
-                    <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat nibh. Cras maximus venenatis molestie.</p>
-                        <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
-                        </div>
-                        <div class="team-info">
-                            <h3 class="user-name">Kelvin Wood</h3>
-                            <span>Digital Marketer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Testimonials Item End ***** -->
-
-            <!-- ***** Testimonials Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="team-item">
-                    <div class="team-content">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i>
-                        <p>Quisque diam odio, maximus ac consectetur eu, auctor non lorem. Cras quis est non ante ultrices molestie. Ut vehicula et diam at aliquam.</p>
-                        <div class="user-image">
-                            <img src="http://placehold.it/60x60" alt="">
-                        </div>
-                        <div class="team-info">
-                            <h3 class="user-name">David Martin</h3>
-                            <span>Website Manager</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Testimonials Item End ***** -->
-        </div>
-    </div>
-</section>
-<!-- ***** Testimonials End ***** -->
-
-<!-- ***** Pricing Plans Start ***** -->
-<section class="section colored" id="pricing-plans">
-    <div class="container">
-        <!-- ***** Section Title Start ***** -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="center-heading">
-                    <h2 class="section-title">Pricing Plans</h2>
-                </div>
-            </div>
-            <div class="offset-lg-3 col-lg-6">
-                <div class="center-text">
-                    <p>Donec vulputate urna sed rutrum venenatis. Cras consequat magna quis arcu elementum, quis congue risus volutpat.</p>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Section Title End ***** -->
-
-        <div class="row">
-            <!-- ***** Pricing Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
-                <div class="pricing-item">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Starter</h3>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">14.50</span>
-                            <span class="period">monthly</span>
-                        </div>
-                        <ul class="list">
-                            <li class="active">60 GB space</li>
-                            <li class="active">600 GB transfer</li>
-                            <li class="active">Pro Design Panel</li>
-                            <li>15-minute support</li>
-                            <li>Unlimited Emails</li>
-                            <li>24/7 Security</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="#" class="main-button">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Pricing Item End ***** -->
-
-            <!-- ***** Pricing Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                <div class="pricing-item active">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Premium</h3>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">21.50</span>
-                            <span class="period">monthly</span>
-                        </div>
-                        <ul class="list">
-                            <li class="active">120 GB space</li>
-                            <li class="active">1200 GB transfer</li>
-                            <li class="active">Pro Design Panel</li>
-                            <li class="active">15-minute support</li>
-                            <li>Unlimited Emails</li>
-                            <li>24/7 Security</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="#" class="main-button">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Pricing Item End ***** -->
-
-            <!-- ***** Pricing Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                <div class="pricing-item">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Advanced</h3>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">42.00</span>
-                            <span class="period">monthly</span>
-                        </div>
-                        <ul class="list">
-                            <li class="active">250 GB space</li>
-                            <li class="active">5000 GB transfer</li>
-                            <li class="active">Pro Design Panel</li>
-                            <li class="active">15-minute support</li>
-                            <li class="active">Unlimited Emails</li>
-                            <li class="active">24/7 Security</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="#" class="main-button">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Pricing Item End ***** -->
-        </div>
-    </div>
-</section>
-<!-- ***** Pricing Plans End ***** -->
-
-<!-- ***** Counter Parallax Start ***** -->
-<section class="counter">
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="count-item decoration-bottom">
-                        <strong>126</strong>
-                        <span>Projects</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="count-item decoration-top">
-                        <strong>63</strong>
-                        <span>Happy Clients</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="count-item decoration-bottom">
-                        <strong>18</strong>
-                        <span>Awards Wins</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="count-item">
-                        <strong>27</strong>
-                        <span>Countries</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ***** Counter Parallax End ***** -->
-
 <!-- ***** Blog Start ***** -->
 <section class="section" id="blog">
     <div class="container">
@@ -451,7 +178,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="center-heading">
-                    <h2 class="section-title">Blog Entries</h2>
+                    <h2 class="section-title">Artikel</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6">
@@ -516,71 +243,77 @@
 </section>
 <!-- ***** Blog End ***** -->
 
-<!-- ***** Contact Us Start ***** -->
-<section class="section colored" id="contact-us">
+<!-- ***** Blog2 Start ***** -->
+<section class="section" id="blog2">
     <div class="container">
         <!-- ***** Section Title Start ***** -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="center-heading">
-                    <h2 class="section-title">Talk To Us</h2>
+                    <h2 class="section-title">Kategori</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6">
                 <div class="center-text">
-                    <p>Maecenas pellentesque ante faucibus lectus vulputate sollicitudin. Cras feugiat hendrerit semper.</p>
+                    <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat nibh. Cras maximus venenatis molestie.</p>
                 </div>
             </div>
         </div>
         <!-- ***** Section Title End ***** -->
 
         <div class="row">
-            <!-- ***** Contact Text Start ***** -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <h5 class="margin-bottom-30">Keep in touch</h5>
-                <div class="contact-text">
-                    <p>110-220 Quisque diam odio, maximus ac consectetur eu, 10260
-                        <br>auctor non lorem
-                    </p>
-                    <p>You are NOT allowed to re-distribute Softy Pinko template on any template collection websites. Thank you.</p>
-                </div>
-            </div>
-            <!-- ***** Contact Text End ***** -->
-
-            <!-- ***** Contact Form Start ***** -->
-            <div class="col-lg-8 col-md-6 col-sm-12">
-                <div class="contact-form">
-                    <form id="contact" action="" method="get">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <fieldset>
-                                    <input name="email" type="email" class="form-control" id="email" placeholder="E-Mail Address" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="main-button">Send Message</button>
-                                </fieldset>
-                            </div>
+                <div class="blog-post-thumb">
+                    <div class="img">
+                        <img src="assets/images/blog-item-01.png" alt="">
+                    </div>
+                    <div class="blog-content">
+                        <h3>
+                            <a href="#">Vivamus ac vehicula dui</a>
+                        </h3>
+                        <div class="text">
+                            Cras aliquet ligula dui, vitae fermentum velit tincidunt id. Praesent eu finibus nunc. Nulla in sagittis eros. Aliquam egestas augue.
                         </div>
-                    </form>
+                        <a href="#" class="main-button">Read More</a>
+                    </div>
                 </div>
             </div>
-            <!-- ***** Contact Form End ***** -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="blog-post-thumb">
+                    <div class="img">
+                        <img src="assets/images/blog-item-02.png" alt="">
+                    </div>
+                    <div class="blog-content">
+                        <h3>
+                            <a href="#">Phasellus convallis augue</a>
+                        </h3>
+                        <div class="text">
+                            Aliquam commodo ornare nisl, et scelerisque nisl dignissim ac. Vestibulum finibus urna ut velit venenatis, vel ultrices sapien mattis.
+                        </div>
+                        <a href="#" class="main-button">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="blog-post-thumb">
+                    <div class="img">
+                        <img src="assets/images/blog-item-03.png" alt="">
+                    </div>
+                    <div class="blog-content">
+                        <h3>
+                            <a href="#">Nam gravida purus non</a>
+                        </h3>
+                        <div class="text">
+                            Maecenas eu erat vitae dui convallis consequat vel gravida nulla. Vestibulum finibus euismod odio, ut tempus enim varius eu.
+                        </div>
+                        <a href="#" class="main-button">Read More</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-<!-- ***** Contact Us End ***** -->
+<!-- ***** Blog End ***** -->
 
 <!-- ***** Footer Start ***** -->
 <footer>
@@ -588,17 +321,15 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <ul class="social">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/muhammad-syamsul-marif-48b688170"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="https://www.instagram.com/x4msulm4rif/"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://github.com/syamsulapp"><i class="fa fa-github"></i></a></li>
                 </ul>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <p class="copyright">Copyright &copy; 2020 Softy Pinko Company - Design: TemplateMo</p>
+                <p class="copyright">Copyright &copy; {{ now()->year }} Samsul Marif </p>
             </div>
         </div>
     </div>
