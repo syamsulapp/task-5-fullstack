@@ -95,7 +95,14 @@ class Articles extends Controller
             $update = $request->only('title', 'content', 'image', 'category_id');
             // jika imagenya di kosongkan maka gambar tidak di update
             if ($request->image != null) {
-                $update['image'] = $request->file('image')->store('image');
+                // request update foto
+                $foto = $request->file('image');
+                $nama_file = time() . "-" . $foto->getClientOriginalName();
+                $file_up = 'img_articles';
+                $foto->move($file_up, $nama_file);
+
+                //put the image for update
+                $update['image'] = $nama_file;
                 !$this->article->where('id', $id)->first() ? $result = $this->resBuilder($request, 422, 'id tidak di temukan') :
                     $result = $this->resBuilder($this->article->where('id', $id)->update($update), 200, 'Successfully update articles');
             } else {
