@@ -42,4 +42,8 @@ class ExampleTest extends TestCase
     //     $this->get('/articles')
     //         ->assertStatus(200);
     // }
+    public function test_that_true_is_true()
+    {
+        $this->assertTrue(true);
+    }
 }
