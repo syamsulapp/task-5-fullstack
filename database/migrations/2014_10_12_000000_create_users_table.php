@@ -14,21 +14,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // auto increment 
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps(); // created at and updated at
             $table->softDeletes();
         });
-
-        DB::table('users')->insert([
-            'name' => 'administrator',
-            'email' => 'administrator@gmail.com',
-            'password' => Hash::make('administrator'),
-        ]);
     }
 
     /**
