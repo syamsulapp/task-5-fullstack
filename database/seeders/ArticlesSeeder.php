@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-
-class Userseeder extends Seeder
+class ArticlesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,12 +16,11 @@ class Userseeder extends Seeder
 
     public function run(): void
     {
-        use App\Models\Articles;
-        DB::table('Articles')->insert([
-            'title' => => $this->faker->title(),
-            'content' => => $this->faker->name(),
-            'user_id'=> random_int(1,10),
-            'category_id'=> random_int(1,10),
+        DB::table('articles')->insert([
+            'title' => 'belajar html',
+            'content' => 'mari belajar html',
+            'users_id' => 1,
+            'category_id' => 1,
         ]);
     }
 }
