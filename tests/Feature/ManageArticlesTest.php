@@ -2,34 +2,117 @@
 
 namespace Tests\Feature;
 
+use App\Models\Categories;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use App\Http\Controllers\Admin\CategoryController;
 
-class ManageArticlesTest extends TestCase
+class CategoryTest extends TestCase
 {
-    use RefreshDatabase;
     /**
      * A basic feature test example.
+     *
+     * @return void
      */
 
-    public function user_can_list_data(): void
+    use RefreshDatabase, WithoutMiddleware;
+    public function test_membuat_kategori()
     {
-        $this->assertTrue(true);
+        $this->withoutExceptionHandling();
+
+        $user = User::create([
+            'name' => 'testing',
+            'email' => 'testing@gmail.com',
+            'password' => Hash::make('testing123'),
+        ]);
+
+        $auth = Auth::login($user);
+
+        Categories::create([
+            'name' => 'test',
+            'user_id' => $user->id,
+        ]);
+
+
+        $response = $this->post(route('category.teststore', ['category_id' => 1]), [
+            'name' => 'test',
+            'user_id' => $user->id,
+        ]);
+        $response->assertRedirect(route('category.testindex'));
     }
 
-    public function user_can_post_data(): void
+
+    public function test_menampilkan_kategori()
     {
-        $this->assertTrue(true);
+        $this->withoutExceptionHandling();
+
+        $user = User::create([
+            'name' => 'testing',
+            'email' => 'testing@gmail.com',
+            'password' => Hash::make('testing123'),
+        ]);
+
+        $auth = Auth::login($user);
+
+        $category = Categories::create([
+            'name' => 'test',
+            'user_id' => $user->id,
+        ]);
+
+
+        $response = $this->get(route('category.testshow', ['category_id' => $category->id]));
+        $response->assertOk();
     }
 
-    public function user_can_edit_data(): void
+    public function test_mengupdate_kategori()
     {
-        $this->assertTrue(true);
+        $this->withoutExceptionHandling();
+
+        $user = User::create([
+            'name' => 'testing',
+            'email' => 'testing@gmail.com',
+            'password' => Hash::make('testing123'),
+        ]);
+
+        $auth = Auth::login($user);
+
+        $category = Categories::create([
+            'name' => 'test',
+            'user_id' => $user->id,
+        ]);
+
+        $data = [
+            'name' => 'testing update',
+            'user_id' => $user->id,
+        ];
+
+        $response = $this->put(route('categories.testupdate', ['category_id' => $category->id]), $data);
+        $response->assertRedirect(route('category.testindex'));
     }
 
-    public function user_can_delete_data(): void
+    public function test_menghapus_kategori()
     {
-        $this->assertTrue(true);
+        $this->withoutExceptionHandling();
+
+        $user = User::create([
+            'name' => 'testing',
+            'email' => 'testing@gmail.com',
+            'password' => Hash::make('testing123'),
+        ]);
+
+        $auth = Auth::login($user);
+
+        $category = Categories::create([
+            'name' => 'test',
+            'user_id' => $user->id,
+        ]);
+
+        $response = $this->delete(route('category.testdelete', ['category_id' => $category->id]));
+        $response->assertRedirect(route('category.testindex'));
     }
 }

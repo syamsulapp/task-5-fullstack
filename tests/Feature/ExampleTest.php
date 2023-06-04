@@ -2,16 +2,18 @@
 
 namespace Tests\Feature;
 
+// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use function PHPUnit\Framework\assertEquals;
 
 class ExampleTest extends TestCase
 {
-    public function test_example()
+    /**
+     * A basic test example.
+     */
+    public function test_the_application_returns_a_successful_response(): void
     {
-        $this->get('/')
-            ->assertStatus(200);
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
     }
 }
