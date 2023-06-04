@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('judul', 'Halaman Depan')
+@section('judul', 'Rakamin VIX Task 5')
 
 @section('konten')
 <!-- ***** Preloader Start ***** -->
